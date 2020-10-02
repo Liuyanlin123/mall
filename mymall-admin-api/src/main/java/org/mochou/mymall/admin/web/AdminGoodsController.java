@@ -101,7 +101,6 @@ public class AdminGoodsController {
     @GetMapping("/detail")
     public Object detail(@NotNull Integer id) {
         return adminGoodsService.detail(id);
-
     }
 
 }

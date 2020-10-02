@@ -383,6 +383,7 @@ export default {
       }
     }
   },
+
   computed: {
     headers() {
       return {
@@ -390,6 +391,7 @@ export default {
       }
     }
   },
+
   created() {
     this.init()
   },
@@ -401,12 +403,15 @@ export default {
         this.brandList = response.data.data.brandList
       })
     },
+
     handleCategoryChange(value) {
       this.goods.categoryId = value[value.length - 1]
     },
+
     handleCancel: function() {
       this.$router.push({ path: '/goods/goods' })
     },
+
     handlePublish: function() {
       const finalGoods = {
         goods: this.goods,
@@ -427,16 +432,19 @@ export default {
         })
       })
     },
+
     handleClose(tag) {
       this.keywords.splice(this.keywords.indexOf(tag), 1)
       this.goods.keywords = this.keywords.toString()
     },
+
     showInput() {
       this.newKeywordVisible = true
       this.$nextTick(_ => {
         this.$refs.newKeywordInput.$refs.input.focus()
       })
     },
+
     handleInputConfirm() {
       const newKeyword = this.newKeyword
       if (newKeyword) {
@@ -446,20 +454,24 @@ export default {
       this.newKeywordVisible = false
       this.newKeyword = ''
     },
+
     uploadPicUrl: function(response) {
       this.goods.picUrl = response.data.url
     },
+
     uploadOverrun: function() {
       this.$message({
         type: 'error',
         message: '上传文件个数超出限制!最多上传5张图片!'
       })
     },
+
     handleGalleryUrl(response, file, fileList) {
       if (response.errno === 0) {
         this.goods.gallery.push(response.data.url)
       }
     },
+
     handleRemove: function(file, fileList) {
       for (var i = 0; i < this.goods.gallery.length; i++) {
         // 这里存在两种情况
@@ -478,6 +490,7 @@ export default {
         }
       }
     },
+
     specChanged: function(label) {
       if (label === false) {
         this.specifications = [{ specification: '规格', value: '标准', picUrl: '' }]
@@ -487,13 +500,16 @@ export default {
         this.products = []
       }
     },
+
     uploadSpecPicUrl: function(response) {
       this.specForm.picUrl = response.data.url
     },
+
     handleSpecificationShow() {
       this.specForm = { specification: '', value: '', picUrl: '' }
       this.specVisiable = true
     },
+
     handleSpecificationAdd() {
       var index = this.specifications.length - 1
       for (var i = 0; i < this.specifications.length; i++) {
@@ -508,11 +524,13 @@ export default {
 
       this.specToProduct()
     },
+
     handleSpecificationDelete(row) {
       const index = this.specifications.indexOf(row)
       this.specifications.splice(index, 1)
       this.specToProduct()
     },
+
     specToProduct() {
       if (this.specifications.length === 0) {
         return
@@ -578,13 +596,16 @@ export default {
 
       this.products = products
     },
+
     handleProductShow(row) {
       this.productForm = Object.assign({}, row)
       this.productVisiable = true
     },
+
     uploadProductUrl: function(response) {
       this.productForm.url = response.data.url
     },
+
     handleProductEdit() {
       for (var i = 0; i < this.products.length; i++) {
         const v = this.products[i]
@@ -595,14 +616,17 @@ export default {
       }
       this.productVisiable = false
     },
+
     handleAttributeShow() {
       this.attributeForm = {}
       this.attributeVisiable = true
     },
+
     handleAttributeAdd() {
       this.attributes.unshift(this.attributeForm)
       this.attributeVisiable = false
     },
+
     handleAttributeDelete(row) {
       const index = this.attributes.indexOf(row)
       this.attributes.splice(index, 1)

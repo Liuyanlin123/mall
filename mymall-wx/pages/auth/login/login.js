@@ -23,7 +23,6 @@ Page({
 
   },
   wxLogin: function(e) {
-    console.log(e.detail.userInfo)
     if (e.detail.userInfo == undefined) {
       app.globalData.hasLogin = false;
       util.showErrorToast('微信登录失败');
@@ -31,7 +30,6 @@ Page({
     }
     user.checkLogin().catch(() => {
       user.loginByWeixin(e.detail.userInfo).then(res => {
-        //todo 没弄明白的
         app.globalData.hasLogin = true;
         wx.navigateBack({
           delta: 1
